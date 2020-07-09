@@ -14,7 +14,7 @@ type Validation m = MW.MonadWriter [ValidationIssue] m
 type Result a = (a, [ValidationIssue])
 
 animalWithLog :: Validation m => (String -> ValidationIssue) -> String -> String -> m Animal
-animalWithLog logger species message = W.writer (Animal species, [logger message])
+animalWithLog logger species message = MW.writer (Animal species, [logger message])
 
 animalWithWarning :: Validation m => String -> String -> m Animal
 animalWithWarning = animalWithLog warningLog
